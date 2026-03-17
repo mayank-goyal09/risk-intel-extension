@@ -1,0 +1,42 @@
+﻿python : Traceback (most 
+recent call last):
+At line:1 char:1
++ python train_model.py 2>&1 
+| Out-File -Encoding utf8 
+training_output. ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo           
+   : NotSpecified: (Traceba  
+  ck (most recent call las   
+ t)::String) [], RemoteEx    
+ception
+    + FullyQualifiedErrorId  
+   : NativeCommandError
+ 
+  File "C:\my_local_data(one 
+drive)\Attachments\Ambition c
+ourse\my_all_projects\projext
+ 72 RAG 
+extension\train_model.py", 
+line 26, in <module>
+    print("\U0001f4c2 
+Loading training data...")
+    ~~~~~^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^
+  File "C:\Program Files\Wind
+owsApps\PythonSoftwareFoundat
+ion.Python.3.13_3.13.3312.0_x
+64__qbz5n2kfra8p0\Lib\encodin
+gs\cp1252.py", line 19, in 
+encode
+    return codecs.charmap_enc
+ode(input,self.errors,encodin
+g_table)[0]
+           ~~~~~~~~~~~~~~~~~~
+~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^
+UnicodeEncodeError: 
+'charmap' codec can't encode 
+character '\U0001f4c2' in 
+position 0: character maps 
+to <undefined>
