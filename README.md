@@ -128,3 +128,60 @@ While we are incredibly proud of this project, we acknowledge areas that require
 - **Client-Side Latency on Massive Pages**: Sending completely independent asynchronous `fetch()` requests to the backend for every single paragraph on a colossal Terms of Service page causes a cascading "waterfall" of network requests, sometimes slowing down the immediate highlight effect.
 
 ---
+
+## ⚙️ Installation & Setup
+
+If you want to run this project natively on your machine from the source, follow these steps:
+
+1. **Start the API Server**
+```bash
+# Ensure you are in the project root
+pip install -r requirements.txt
+uvicorn app:app --reload
+# The server will spin up on http://localhost:8000
+```
+
+2. **Load the Extension**
+- Open Google Chrome
+- Navigate to `chrome://extensions/`
+- Toggle **Developer mode** in the top right.
+- Click **"Load unpacked"** and select the `/tos_extension` directory.
+
+### 📦 Install the packaged Extension (.crx file)
+If you just want the Chrome Extension without compiling the source:
+**➡️ [`Click here for tos_extension.crx`](./tos_extension.crx)**
+*Then drag and drop it into `chrome://extensions/`!*
+
+---
+
+## 🧠 Architecture Mind Map
+
+```mermaid
+mindmap
+  root((Risk Intel))
+    Chrome HTML Frontend
+      manifest.json
+        Permissions
+        Content Scripts
+        Host Specs
+      content.js
+        Extracts DOM Elements
+        Calculates Length Filters
+        Injects CSS Highlights
+      popup.html
+        User UI Configuration
+    Python Backend
+      app.py
+      CORS Middleware
+      /analyze POST endpoint
+        Regex Text Pre-processing
+        Probability Scoring Returns
+    Machine Learning
+      tos_data.csv
+      train_model.py
+      tos_model.pkl
+        ScikitLearn Pipeline
+        0.80 Confidence Threshold
+```
+
+---
