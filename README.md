@@ -45,3 +45,51 @@ By combining Python data science libraries directly with standard web developmen
 3. **The Voice (DOM Manipulation)**: Dynamic in-browser highlighting. If a clause is flagged as predatory (scoring above our 80% confidence threshold), the extension visually alerts the user by injecting a red background (`#ffe6e6`) and a robust solid red border to that specific HTML element.
 
 ---
+
+## 🛠️ Technologies Used
+
+Building an application of this scale required a diverse technology stack spanning from data compilation to frontend visualization:
+
+- **Frontend & Browser**
+  - HTML5 & CSS3 (For the `popup.html` interface)
+  - Vanilla JavaScript (ES6+ for `content.js` DOM extraction and REST APIs)
+  - Google Chrome Extension Manifest V3 (`manifest.json`)
+- **Backend Infrastructure**
+  - **Python 3.10+**: The core language powering the logic.
+  - **FastAPI**: Used for ultra-fast, asynchronous API endpoint generation.
+  - **Uvicorn**: An ASGI web server implementation for Python.
+- **Machine Learning & Data Science**
+  - **Scikit-Learn**: Used heavily in `train_model.py` for TF-IDF vectorization and classification.
+  - **Joblib**: Used for exporting and importing the trained `tos_model.pkl` weights.
+  - **Pandas**: Crucial for structuring and cleaning the original `tos_data.csv` corpus.
+  - **Jupyter Notebooks**: `main.ipynb` act as the initial research sandbox.
+
+---
+
+## 📂 File Structure
+
+Understanding where everything is located is critical for future maintenance and open-source contributions. Here is the current directory layout:
+
+```text
+📦 project-72-rag-extension
+ ┣ 📂 tos_extension                 # The Chrome Extension Source Code
+ ┃ ┣ 📜 content.js                  # Scans page, manipulates DOM, requests API
+ ┃ ┣ 📜 manifest.json               # V3 Manifest, permissions (activeTab, scripting)
+ ┃ ┣ 📜 popup.html                  # HTML for the popup when you click the extension logo
+ ┃ ┗ 📜 popup.js                    # Logic directing the popup UI
+ ┣ 📂 tos_env                       # Virtual Environment for Python
+ ┃ ┗ 📜 ...                         # Standard venv libraries
+ ┣ 📜 app.py                        # FastAPI Backend Application Server
+ ┣ 📜 main.ipynb                    # Jupyter Sandbox for Data Exploration
+ ┣ 📜 predatory_clause_model.pkl    # Serialized ML Model (Alternative/Backup)
+ ┣ 📜 requirements.txt              # Pip dependencies (fastapi, scikit-learn, joblib)
+ ┣ 📜 test.html                     # Local test page containing dummy TOS clauses
+ ┣ 📜 tos_data.csv                  # The raw corpus mapping texts to 0 or 1
+ ┣ 📜 tos_extension.crx             # The Packaged Chrome Extension (INSTALLABLE!)
+ ┣ 📜 tos_extension.pem             # Private Key generated during Chrome Packing
+ ┣ 📜 tos_model.pkl                 # The Primary Serialized ML Model used in Production
+ ┣ 📜 train_model.py                # Script to convert tos_data.csv into tos_model.pkl
+ ┗ 📜 training_output.txt           # Logs regarding the precision/recall of the model
+```
+
+---
