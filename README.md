@@ -185,3 +185,50 @@ mindmap
 ```
 
 ---
+
+## 📊 Extension Workflow (Infographic)
+
+```mermaid
+sequenceDiagram
+    autonumber
+    actor User
+    participant Browser as Chrome (content.js)
+    participant Server as FastAPI (app.py)
+    participant Model as tos_model.pkl
+
+    User->>Browser: Opens Terms of Service Webpage
+    Browser->>Browser: Extracts <p> and <li> tags
+    
+    loop Every Single Paragraph
+        alt Text length < 30 chars
+            Browser->>Browser: Discard (Save Network request)
+        else Text length >= 30 chars
+            Browser->>Server: HTTP POST /analyze {text: "..."}
+            Server->>Server: apply regex clean_text(text)
+            Server->>Model: predict_proba([cleaned_text])
+            Model-->>Server: Array [Safe_Prob, Predatory_Prob]
+            
+            alt Predatory_Prob >= 0.80
+                Server-->>Browser: JSON {is_predatory: true, reason: "85% confidence"}
+                Browser->>Browser: Apply Red Background & Border (#ffe6e6)
+            else Predatory_Prob < 0.80
+                Server-->>Browser: JSON {is_predatory: false}
+                Browser->>Browser: Do nothing (Leave paragraph styling as is)
+            end
+        end
+    end
+    Browser-->>User: Visualized Page with Predatory Alerts 🚨
+```
+
+---
+
+## 🎬 Outro
+
+Thank you so much for checking out **Risk Intel - TOS Dark Pattern Detector**! 🎉
+
+We built this project with the vision of protecting everyday internet users from the manipulative, endlessly long, and overly complex legal documents that companies force us to accept. As the digital landscape becomes more complicated, it's vital that we have tools to fight back and regain our privacy.
+
+A huge shoutout to everyone who supported this project, helped compile the dataset, and provided feedback on the UI/UX. If you like what we've built, feel free to fork this repository, train an even better model, and submit a pull request! Together, we can make the web a safer and more transparent place.
+
+*Stay safe, stay secure, and never click "I Agree" blindly again!* 🛡️✌️
+
