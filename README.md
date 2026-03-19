@@ -93,3 +93,16 @@ Understanding where everything is located is critical for future maintenance and
 ```
 
 ---
+
+## 🤯 Problems Faced & How We Resolved Them
+
+Developing a seamless bridge between a user's local browser and an ML server came with significant technical hurdles:
+
+| Problem 🚨 | Our Resolution ✅ |
+| :--- | :--- |
+| **Too Many False Positives** <br> *Initially, the ML model was acting too aggressively, flagging perfectly safe sentences like "Welcome to our website" as predatory, which ruined the browsing experience.* | **High-Precision Thresholding** <br> We implemented a strict `CONFIDENCE_THRESHOLD = 0.80` manually inside our FastAPI backend (`app.py`). Rather than trusting a standard 50% split, the model now **only** flags sentences where it is >80% confident it exhibits a predatory pattern. |
+| **CORS Blocked by Browser** <br> *Because `content.js` runs in the context of random websites (like `google.com`), Chrome blocks HTTP requests to `localhost:8000` for security (Cross-Origin Resource Sharing).* | **Backend & Manifest Updates** <br> We resolved this on two fronts. First, we added `CORSMiddleware` in `app.py` allowing `["*"]` origins. Secondly, we explicitly added `"http://localhost:8000/*"` to the `host_permissions` array in `manifest.json`. |
+| **Inefficient Scanning & Server Crashes** <br> *When opening massive legal documents, the extension was sending hundreds of API requests for empty formatting `<div>`s, single characters, and 3-word sentences. It overloaded the network loop.* | **Dual-Layer Filtering** <br> We created a dual-check system. On the frontend, `content.js` uses string manipulation (`trim().length`) to drop anything under 30 characters. On the backend, `app.py` rejects texts composed of fewer than 4 words, saving processing power and reducing lag. |
+| **Matching Data Formats** <br> *The model was failing to recognize text that contained weird punctuation or capitalization the user saw on the screen.* | **Regex Standardization** <br> We ensured the text cleaning phase (`clean_text` function) in the production backend `app.py` matches the preprocessing in `train_model.py` identically down to the regular expressions, guaranteeing model accuracy translates perfectly. |
+
+---
