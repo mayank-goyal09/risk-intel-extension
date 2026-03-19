@@ -106,3 +106,25 @@ Developing a seamless bridge between a user's local browser and an ML server cam
 | **Matching Data Formats** <br> *The model was failing to recognize text that contained weird punctuation or capitalization the user saw on the screen.* | **Regex Standardization** <br> We ensured the text cleaning phase (`clean_text` function) in the production backend `app.py` matches the preprocessing in `train_model.py` identically down to the regular expressions, guaranteeing model accuracy translates perfectly. |
 
 ---
+
+## ✨ The Unique Thing We've Done
+
+Many privacy-policy analyzers exist on the web. usually, they require you to copy long walls of text, paste it into their external website, wait for a scan, and then read their summary.
+**We completely reversed this paradigm.**
+
+1. **Real-Time Explainable AI (XAI) Injection**: 
+Risk Intel reads the page *with you*. It doesn't break your workflow. It injects hover-able tooltips detailing exactly *why* a specific clause was flagged (e.g., `"⚠️ Predatory pattern detected (89% confidence)"`). 
+2. **Intelligent DOM Manipulation**:
+We utilize raw JavaScript to trace back the exact source of a flagged text array and apply localized CSS styling (`backgroundColor = "#ffe6e6"`). You literally watch the page light up in warning colors as you scroll through dangerous documents.
+
+---
+
+## 📉 Drawbacks
+
+While we are incredibly proud of this project, we acknowledge areas that require improvement in future versions:
+
+- **Requires a Local Server (Not fully standalone yet)**: Right now, the ML model (`.pkl` file) requires Python and Scikit-Learn to be interpreted. End-users must run `uvicorn app:app --reload` on their terminal to power the extension. A future update should port the model to `TensorFlow.js` or host the FastAPI instance on AWS/Heroku.
+- **Dataset Bias Limitations**: The model's intelligence is entirely restricted to the historical patterns within `tos_data.csv`. Extremely novel, legally obfuscated dark patterns, or foreign languages might easily bypass our strict 80% confidence threshold.
+- **Client-Side Latency on Massive Pages**: Sending completely independent asynchronous `fetch()` requests to the backend for every single paragraph on a colossal Terms of Service page causes a cascading "waterfall" of network requests, sometimes slowing down the immediate highlight effect.
+
+---
