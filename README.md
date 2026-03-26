@@ -107,13 +107,13 @@ This end-to-end **AI-powered Chrome extension** scans long, confusing legal docu
 
 ```mermaid
 graph LR
-    A[🌐 Webpage TOS] --> B[📋 Extraction (p, li)]
-    B --> C[📡 HTTP POST /analyze]
-    C --> D[⚙️ Clean Text (Regex)]
-    D --> E[🧠 ML Prediction]
-    E -- Confidence >= 80% --> F[🚨 Highlight Red]
-    E -- Confidence < 80% --> G[✅ Leave Safe]
-    F --> H[🛡️ Visual Alert to User]
+    A["🌐 Webpage TOS"] --> B["📋 Extraction (p, li)"]
+    B --> C["📡 HTTP POST /analyze"]
+    C --> D["⚙️ Clean Text (Regex)"]
+    D --> E["🧠 ML Prediction"]
+    E -- "Confidence >= 80%" --> F["🚨 Highlight Red"]
+    E -- "Confidence < 80%" --> G["✅ Leave Safe"]
+    F --> H["🛡️ Visual Alert to User"]
     G --> H
     
     style A fill:#FF3B30,color:#fff
