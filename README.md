@@ -2,7 +2,7 @@
 
 # 🛡️ Risk Intel — TOS Dark Pattern Detector
 
-[![Typing SVG](https://readme-typing-svg.demolab.com?font=Outfit&weight=700&size=32&duration=3500&pause=1000&color=FF3B30&center=true&vCenter=true&multiline=true&width=900&height=100&lines=Detecting+Predatory+Clauses+Instantly...;AI-Powered+Terms+of+Service+Scanner;Protecting+Your+Digital+Rights;Risk+Intel+Extension+%7C+NLP+Security)](https://git.io/typing-svg)
+[![Typing SVG](https://readme-typing-svg.demolab.com?font=Outfit&weight=700&size=32&duration=3500&pause=1000&color=FF3B30&center=true&vCenter=true&width=900&height=100&lines=Detecting+Predatory+Clauses+Instantly...;AI-Powered+Terms+of+Service+Scanner;Protecting+Your+Digital+Rights;Risk+Intel+Extension+%7C+NLP+Security)](https://git.io/typing-svg)
 
 ![Python](https://img.shields.io/badge/Python-3.10%2B-3776AB?style=for-the-badge&logo=python&logoColor=white)
 ![FastAPI](https://img.shields.io/badge/FastAPI-009688?style=for-the-badge&logo=fastapi&logoColor=white)
